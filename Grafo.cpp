@@ -22,7 +22,7 @@ Grafo::~Grafo()	{
 void Grafo::Destruir(){
 	//destruye lo que ya está 
     for (int i=0; i<vertices; i++)
-        delete [] matriz_grafo[i];	//ver si no va this porque la puedo llamar para otro grafo !!
+        delete [] matriz_grafo[i];	
     delete [] matriz_grafo;
 }
 
@@ -85,8 +85,7 @@ void Grafo::Eliminar_vertice(int vert){
 	Grafo aux_matriz_grafo(vertices - 1);
 	
 	// MAL este metodo cambia el identificador del vertice!!
-	// mejor poner un valor distintivo en filas y columnas del vertice a eliminar
-	// por ej -1  y modificar el EXISTE!!
+	// habria que armar un arreglo que lleve los identificadores en enteros o string o algo
 
 	// copia el auxiliar con los valores anteriores (4 submatrices)
 	//		   ||    

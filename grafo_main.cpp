@@ -4,6 +4,43 @@
 using namespace std;
 
 
+void imprimir_matriz(Grafo un_grafo, int vertices){
+	int fil= vertices;
+	int col= vertices;
+
+	for (int i= 0; i < fil; i++){
+		cout << "|";
+		for (int j = 0; j < col; j++){
+			int num= un_grafo.Ver_costo_arco(i, j);
+
+		if (num >= 0){
+			if (num < 10){
+				cout << "  " << un_grafo.Ver_costo_arco(i, j) << "|";
+			}else{
+				if (num < 100){
+					cout << " " << un_grafo.Ver_costo_arco(i, j) << "|";
+				}else{
+					cout << un_grafo.Ver_costo_arco(i, j) << "|";
+				}
+			}
+		}else{
+			if (num > -10){
+				cout << " " << un_grafo.Ver_costo_arco(i, j) << "|";
+				}else{
+					if (num > -100){
+						cout << "  " << un_grafo.Ver_costo_arco(i, j) << "|";
+					}else{
+						cout << un_grafo.Ver_costo_arco(i, j) << "|";
+					}
+				}
+			}
+		}
+		cout << endl;
+	}
+	cout << endl;
+
+}
+
 int main(){
 
 	int vertices, origen, destino, costo, opcion, vert;
@@ -24,6 +61,7 @@ int main(){
     cout << "6- Agregar Vertice" << endl;
     cout << "7- Eliminar Vertice" << endl;
     cout << "8- ver Cantidad de Vertices" << endl;
+    cout << "9- ver Matriz de Adyacencia" << endl;
     cout << endl;
     cout << "0- Salir" << endl;
 	cout << "****************************************" << endl;
@@ -98,7 +136,10 @@ int main(){
     			cout << endl <<  "Cantidad de vertices: " << pelele.Cantidad_vertices() << endl;
     		}
 	            break;
-
+    		case 9:{
+				imprimir_matriz(pelele, vertices);
+			}
+	            break;
     		default:{
                 cout <<  endl << "Opción invalida\n" << "Ingrese una nueva opción\n";
             }
@@ -117,6 +158,7 @@ int main(){
     cout << "6- Agregar Vertice" << endl;
     cout << "7- Eliminar Vertice" << endl;
     cout << "8- ver Cantidad de Vertices" << endl;
+    cout << "9- ver Matriz de Adyacencia" << endl;
     cout << endl;
     cout << "0- Salir" << endl;
 	cout << "****************************************" << endl;
