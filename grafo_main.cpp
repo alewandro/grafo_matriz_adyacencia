@@ -1,15 +1,25 @@
 #include <iostream>
 #include "Grafo.h"
+#include <list>
 
 using namespace std;
 
+void imprimir_lista(list<int> una_lista){
+	list<int>::iterator iterador= una_lista.begin();
+	while (iterador != una_lista.end()) {
+		cout << *iterador << " ";
+		iterador++;
+	}
+	cout << endl;
+}
 
 void imprimir_matriz(Grafo un_grafo, int vertices){
 	int fil= vertices;
 	int col= vertices;
 
+	cout << endl;
 	for (int i= 0; i < fil; i++){
-		cout << "|";
+		cout << i << " |";
 		for (int j = 0; j < col; j++){
 			int num= un_grafo.Ver_costo_arco(i, j);
 
@@ -44,6 +54,9 @@ void imprimir_matriz(Grafo un_grafo, int vertices){
 int main(){
 
 	int vertices, origen, destino, costo, opcion, vert;
+	list<int> lista_adyacentes;
+	list<int>::iterator iterador;
+
 	cout << endl << "Ingrese la cantidad de vertices de su Grafo:" << endl;
 	cin >> vertices;
 
@@ -52,16 +65,18 @@ int main(){
 	
 	cout << "****************************************" << endl;
 	cout << endl << "que desea hacer?" << endl << endl;
-    cout << "1- Agregar un Arco" << endl;
-    cout << "2- Eliminar un Arco" << endl;
-    cout << "3- Ver el Costo de un Arco" << endl;
-    cout << "4- Existe Arco?" << endl;
-    cout << "5- Modificar el Costo de un Arco?" << endl;
+    cout << " 1- Agregar un Arco" << endl;
+    cout << " 2- Eliminar un Arco" << endl;
+    cout << " 3- Ver el Costo de un Arco" << endl;
+    cout << " 4- Existe Arco?" << endl;
+    cout << " 5- Modificar el Costo de un Arco" << endl;
+    cout << " 6- ver Arcos Entrantes" << endl;
+    cout << " 7- ver Arcos Salientes (adyacentes)" << endl;
     cout << endl;
-    cout << "6- Agregar Vertice" << endl;
-    cout << "7- Eliminar Vertice" << endl;
-    cout << "8- ver Cantidad de Vertices" << endl;
-    cout << "9- ver Matriz de Adyacencia" << endl;
+    cout << " 8- Agregar Vertice" << endl;
+    cout << " 9- Eliminar Vertice" << endl;
+    cout << "10- ver Cantidad de Vertices" << endl;
+    cout << "11- ver Matriz de Adyacencia" << endl;
     cout << endl;
     cout << "0- Salir" << endl;
 	cout << "****************************************" << endl;
@@ -119,12 +134,23 @@ int main(){
 				cout <<  endl << "el costo del arco (" << origen << ", " << destino << ") es " << pelele.Ver_costo_arco(origen, destino) << endl;
     		}
     		case 6:{
+
+    		}
+    			break;
+    		case 7:{
+    			cout << "Ingrese el Vertice para ver sus adyacentes: ";
+    			cin >> vert;
+    			pelele.Devolver_adyacentes(vert, lista_adyacentes);
+    			imprimir_lista(lista_adyacentes);
+    		}
+    			break;
+    		case 8:{
     			pelele.Agregar_vertice();
     			cout << endl <<  "Vertice Agregado! " << endl;
     			cout << "Cantidad de vertices: " << pelele.Cantidad_vertices() << endl;
     		}
 	            break;
-    		case 7:{
+    		case 9:{
     			cout << "Ingrese el N° de Vertice a Eliminar: ";
     			cin >> vert;
     			pelele.Eliminar_vertice(vert);
@@ -132,11 +158,11 @@ int main(){
     			cout << "Cantidad de vertices: " << pelele.Cantidad_vertices() << endl;
     		}
 	            break;
-    		case 8:{
+    		case 10:{
     			cout << endl <<  "Cantidad de vertices: " << pelele.Cantidad_vertices() << endl;
     		}
 	            break;
-    		case 9:{
+    		case 11:{
 				imprimir_matriz(pelele, vertices);
 			}
 	            break;
@@ -153,12 +179,15 @@ int main(){
     cout << "2- Eliminar un Arco" << endl;
     cout << "3- Ver el Costo de un Arco" << endl;
     cout << "4- Existe Arco?" << endl;
-    cout << "5- Modificar el Costo de un Arco?" << endl;
+    cout << "5- Modificar el Costo de un Arco" << endl;
     cout << endl;
-    cout << "6- Agregar Vertice" << endl;
-    cout << "7- Eliminar Vertice" << endl;
-    cout << "8- ver Cantidad de Vertices" << endl;
-    cout << "9- ver Matriz de Adyacencia" << endl;
+    cout << " 6- ver Arcos Entrantes" << endl;
+    cout << " 7- ver Arcos Salientes (adyacentes)" << endl;
+    cout << endl;
+    cout << " 8- Agregar Vertice" << endl;
+    cout << " 9- Eliminar Vertice" << endl;
+    cout << "10- ver Cantidad de Vertices" << endl;
+    cout << "11- ver Matriz de Adyacencia" << endl;
     cout << endl;
     cout << "0- Salir" << endl;
 	cout << "****************************************" << endl;

@@ -1,5 +1,8 @@
 #include "Grafo.h"
 #include "iostream"
+#include <list>
+
+using namespace std;
 
 Grafo::Grafo(const int & vert){
 	vertices= vert;
@@ -115,6 +118,15 @@ void Grafo::Eliminar_vertice(int vert){
 
 }
 
+void Grafo::Devolver_adyacentes(int vert, list<int> &lista_adyacentes){
+
+	lista_adyacentes.clear();
+	for (int j=0; j<vertices; j++)
+		lista_adyacentes.push_front(matriz_grafo[vert][j]);
+	
+}
+
+
 /*
 int *Grafo::Arcos_salientes(int vertice) const{
 	int *auxiliar_arcos= new int[vertices];
@@ -124,7 +136,7 @@ int *Grafo::Arcos_salientes(int vertice) const{
 
 	return &auxiliar_arcos;
 }
-*/
+
 
 int *Grafo::Arcos_entrantes(int vertice) const{
 	int *auxiliar_arcos= new int [vertices];
@@ -136,3 +148,4 @@ int *Grafo::Arcos_entrantes(int vertice) const{
 
 	return auxiliar_arcos;
 }
+*/
