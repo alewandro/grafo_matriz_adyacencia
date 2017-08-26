@@ -1,12 +1,9 @@
 #include "Arco.h"
 
 	Arco::Arco(const int o, const int d, const int c){
-				//A.origen= o;
-				//A.destino= d;
-				//A.costo= c;
-				origen= o;
-				destino= d;
-				costo= c;
+		origen= o;
+		destino= d;
+		costo= c;
 
 	}
 

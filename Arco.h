@@ -10,21 +10,10 @@ class Arco{
 		int Destino() const;
 		int Costo() const;
 
-
-
 	private:
-		/*
-		struct arco{
-			int origen;
-			int destino;
-			int costo;
-		};
-		*/
 		int origen;
 		int destino;
 		int costo;
-		
-		//arco A;
 
 };
 
