@@ -1,3 +1,4 @@
+#include "Arco.h"
 #include "Grafo.h"
 #include "iostream"
 #include <list>
@@ -118,34 +119,25 @@ void Grafo::Eliminar_vertice(int vert){
 
 }
 
-void Grafo::Devolver_adyacentes(int vert, list<int> &lista_adyacentes){
+void Grafo::Devolver_adyacentes(int vert, list<Arco> &lista_adyacentes){
 
 	lista_adyacentes.clear();
-	for (int j=0; j<vertices; j++)
-		lista_adyacentes.push_front(matriz_grafo[vert][j]);
 	
+	for (int j=0; j<vertices; j++)
+		if (matriz_grafo[vert][j] != 0){
+			Arco un_arco(vert, j, matriz_grafo[vert][j]);
+			lista_adyacentes.push_front(un_arco);
+		}
 }
 
+void Grafo::Devolver_entrantes(int vert, list<Arco> &lista_entrantes){
 
-/*
-int *Grafo::Arcos_salientes(int vertice) const{
-	int *auxiliar_arcos= new int[vertices];
-
-	// salientes son las filas de la matriz
-	auxiliar_arcos= matriz_grafo[vertice][0];
-
-	return &auxiliar_arcos;
+	lista_entrantes.clear();
+	
+	for (int i=0; i<vertices; i++)
+		if (matriz_grafo[i][vert] != 0){
+			Arco un_arco(i, vert, matriz_grafo[i][vert]);
+			lista_entrantes.push_front(un_arco);
+		}
 }
 
-
-int *Grafo::Arcos_entrantes(int vertice) const{
-	int *auxiliar_arcos= new int [vertices];
-	//entrantes son las columnas de la matriz
-
-	for (int i=0; i<vertices; i++){
-		auxiliar_arcos[i]= matriz_grafo[i][vertice];
-	}
-
-	return auxiliar_arcos;
-}
-*/

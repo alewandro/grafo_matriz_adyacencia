@@ -1,13 +1,16 @@
 #include <iostream>
+#include "Arco.h"
 #include "Grafo.h"
 #include <list>
 
 using namespace std;
 
-void imprimir_lista(list<int> una_lista){
-	list<int>::iterator iterador= una_lista.begin();
+void imprimir_lista(list<Arco> una_lista){
+	cout << " O  D  C" << endl;
+	list<Arco>::iterator iterador= una_lista.begin();
 	while (iterador != una_lista.end()) {
-		cout << *iterador << " ";
+		Arco un_arco= *iterador;
+		cout << "(" << un_arco.Origen() << ", " << un_arco.Destino() << ", " << un_arco.Costo() << ")" << endl;
 		iterador++;
 	}
 	cout << endl;
@@ -17,30 +20,39 @@ void imprimir_matriz(Grafo un_grafo, int vertices){
 	int fil= vertices;
 	int col= vertices;
 
+	cout << endl << "  ";
+	for (int i=0; i<col; i++)
+		cout << "| " << i << " ";
+
+	cout << endl << "  ";	
+	for (int i=0; i<col; i++)
+		cout << "----" ;
+
+
 	cout << endl;
 	for (int i= 0; i < fil; i++){
 		cout << i << " |";
 		for (int j = 0; j < col; j++){
-			int num= un_grafo.Ver_costo_arco(i, j);
+			int num= un_grafo.Ver_costo_arco(j, i);
 
 		if (num >= 0){
 			if (num < 10){
-				cout << "  " << un_grafo.Ver_costo_arco(i, j) << "|";
+				cout << "  " << un_grafo.Ver_costo_arco(j, i) << "|";
 			}else{
 				if (num < 100){
-					cout << " " << un_grafo.Ver_costo_arco(i, j) << "|";
+					cout << " " << un_grafo.Ver_costo_arco(j, i) << "|";
 				}else{
-					cout << un_grafo.Ver_costo_arco(i, j) << "|";
+					cout << un_grafo.Ver_costo_arco(j, i) << "|";
 				}
 			}
 		}else{
 			if (num > -10){
-				cout << " " << un_grafo.Ver_costo_arco(i, j) << "|";
+				cout << " " << un_grafo.Ver_costo_arco(j, i) << "|";
 				}else{
 					if (num > -100){
-						cout << "  " << un_grafo.Ver_costo_arco(i, j) << "|";
+						cout << "  " << un_grafo.Ver_costo_arco(j, i) << "|";
 					}else{
-						cout << un_grafo.Ver_costo_arco(i, j) << "|";
+						cout << un_grafo.Ver_costo_arco(j, i) << "|";
 					}
 				}
 			}
@@ -54,14 +66,13 @@ void imprimir_matriz(Grafo un_grafo, int vertices){
 int main(){
 
 	int vertices, origen, destino, costo, opcion, vert;
-	list<int> lista_adyacentes;
-	list<int>::iterator iterador;
+	list<Arco> lista_arcos;
 
 	cout << endl << "Ingrese la cantidad de vertices de su Grafo:" << endl;
 	cin >> vertices;
 
-	Grafo pelele(vertices);
-	cout << endl << "Grafo con " << pelele.Cantidad_vertices() << " vertices creado!" << endl << endl;
+	Grafo un_grafo(vertices);
+	cout << endl << "Grafo con " << un_grafo.Cantidad_vertices() << " vertices creado!" << endl << endl;
 	
 	cout << "****************************************" << endl;
 	cout << endl << "que desea hacer?" << endl << endl;
@@ -90,7 +101,7 @@ int main(){
 				cin >> destino;
 				cout << "Ingrese Costo del arco: ";
 				cin >> costo;
-				pelele.Agregar_arco(origen, destino, costo);
+				un_grafo.Agregar_arco(origen, destino, costo);
 				cout << endl << "Se agregó el arco (" << origen << ", " << destino << ", " << costo << ")" << endl;
     		}
 	            break;
@@ -99,7 +110,7 @@ int main(){
 				cin >> origen;
 				cout << "Ingrese Destino del arco: ";
 				cin >> destino;
-				pelele.Eliminar_arco(origen, destino);
+				un_grafo.Eliminar_arco(origen, destino);
 				cout << endl <<  "Se Eliminó el arco (" << origen << ", " << destino << ")" << endl;	
     		}
 	            break;
@@ -108,7 +119,7 @@ int main(){
 				cin >> origen;
 				cout << "Ingrese Destino del arco: ";
 				cin >> destino;
-				cout <<  endl << "el costo del arco (" << origen << ", " << destino << ") es " << pelele.Ver_costo_arco(origen, destino) << endl;
+				cout <<  endl << "el costo del arco (" << origen << ", " << destino << ") es " << un_grafo.Ver_costo_arco(origen, destino) << endl;
     		}
 	            break;
     		case 4:{
@@ -116,10 +127,10 @@ int main(){
 				cin >> origen;
 				cout << "Ingrese Destino del arco: ";
 				cin >> destino;
-    			if (pelele.Existe_arco(origen, destino))
-    				cout << endl <<  "(" << origen << ", " << destino << ") Existe";
+    			if (un_grafo.Existe_arco(origen, destino))
+    				cout << endl <<  "(" << origen << ", " << destino << ") Existe" << endl;
     			else
-    				cout << endl <<  "(" << origen << ", " << destino << ") NO Existe";
+    				cout << endl <<  "(" << origen << ", " << destino << ") NO Existe" << endl;
 
     		}
 	            break;
@@ -130,40 +141,43 @@ int main(){
 				cin >> destino;
 				cout << "Ingrese el Nuevo Costo del arco: ";
 				cin >> costo;
-				pelele.Modificar_costo_arco(origen, destino, costo);
-				cout <<  endl << "el costo del arco (" << origen << ", " << destino << ") es " << pelele.Ver_costo_arco(origen, destino) << endl;
+				un_grafo.Modificar_costo_arco(origen, destino, costo);
+				cout <<  endl << "el costo del arco (" << origen << ", " << destino << ") es " << un_grafo.Ver_costo_arco(origen, destino) << endl;
     		}
     		case 6:{
-
+    			cout << "Ingrese el Vertice para ver Arcos Entrantes: ";
+    			cin >> vert;
+    			un_grafo.Devolver_entrantes(vert, lista_arcos);
+    			imprimir_lista(lista_arcos);
     		}
     			break;
     		case 7:{
-    			cout << "Ingrese el Vertice para ver sus adyacentes: ";
+    			cout << "Ingrese el Vertice para ver Arcos Salientes: ";
     			cin >> vert;
-    			pelele.Devolver_adyacentes(vert, lista_adyacentes);
-    			imprimir_lista(lista_adyacentes);
+    			un_grafo.Devolver_adyacentes(vert, lista_arcos);
+    			imprimir_lista(lista_arcos);
     		}
     			break;
     		case 8:{
-    			pelele.Agregar_vertice();
+    			un_grafo.Agregar_vertice();
     			cout << endl <<  "Vertice Agregado! " << endl;
-    			cout << "Cantidad de vertices: " << pelele.Cantidad_vertices() << endl;
+    			cout << "Cantidad de vertices: " << un_grafo.Cantidad_vertices() << endl;
     		}
 	            break;
     		case 9:{
     			cout << "Ingrese el N° de Vertice a Eliminar: ";
     			cin >> vert;
-    			pelele.Eliminar_vertice(vert);
+    			un_grafo.Eliminar_vertice(vert);
     			cout << endl << "Vertice Eliminado! " << endl;
-    			cout << "Cantidad de vertices: " << pelele.Cantidad_vertices() << endl;
+    			cout << "Cantidad de vertices: " << un_grafo.Cantidad_vertices() << endl;
     		}
 	            break;
     		case 10:{
-    			cout << endl <<  "Cantidad de vertices: " << pelele.Cantidad_vertices() << endl;
+    			cout << endl <<  "Cantidad de vertices: " << un_grafo.Cantidad_vertices() << endl;
     		}
 	            break;
     		case 11:{
-				imprimir_matriz(pelele, vertices);
+				imprimir_matriz(un_grafo, vertices);
 			}
 	            break;
     		default:{
@@ -175,13 +189,13 @@ int main(){
 
 	cout << "****************************************" << endl;
 	cout << endl << "que desea hacer?" << endl << endl;
-    cout << "1- Agregar un Arco" << endl;
-    cout << "2- Eliminar un Arco" << endl;
-    cout << "3- Ver el Costo de un Arco" << endl;
-    cout << "4- Existe Arco?" << endl;
-    cout << "5- Modificar el Costo de un Arco" << endl;
+    cout << " 1- Agregar un Arco" << endl;
+    cout << " 2- Eliminar un Arco" << endl;
+    cout << " 3- Ver el Costo de un Arco" << endl;
+    cout << " 4- Existe Arco?" << endl;
+    cout << " 5- Modificar el Costo de un Arco" << endl;
     cout << endl;
-    cout << " 6- ver Arcos Entrantes" << endl;
+    cout << " 6- ver Arcos Entrantes a un vertice" << endl;
     cout << " 7- ver Arcos Salientes (adyacentes)" << endl;
     cout << endl;
     cout << " 8- Agregar Vertice" << endl;

@@ -1,6 +1,7 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 #include <list>
+#include "Arco.h"
 
 using namespace std;
 
@@ -20,16 +21,13 @@ class Grafo{
 		void Agregar_vertice();
 		void Eliminar_vertice(int vert);
 
-		//int *Arcos_salientes(int vertice) const;
-		//int *Arcos_entrantes(int vertice) const; 
-		void Devolver_adyacentes(int vertice, list<int> &lista_adyacentes);
+		void Devolver_adyacentes(int vert, list<Arco> &lista_adyacentes);
+		void Devolver_entrantes(int vert, list<Arco> &lista_entrantes);
 
 	private:
 		// la estructura a utilizar va a ser una madriz de tamaño vertice x vertice
 		int vertices, origen, destino, costo;
-		//int *auxiliar_arcos;
 		int **matriz_grafo;
-		// list<int> lista_adyacentes;
 
 };
 
